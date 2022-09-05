@@ -1,0 +1,330 @@
+body
+{
+	background-color: #010101;
+}
+
+
+
+
+.top_links
+{
+	padding: 20px 20px 0px 0px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: right;
+	font-family: "Roboto Condensed", sans-serif;
+	color: white;
+}
+.top_links img
+{
+	vertical-align: middle;
+	height: 20px;
+	width: auto;
+}
+.top_links p
+{
+	padding: 10px 0px;
+}
+
+.top_links p a
+{
+	color: white;
+}
+header
+{
+	width: 100%;
+	color: #FFFFFF;
+	font: normal normal 10em "Anton", sans-serif;
+	margin: 20px auto;
+	text-align: center;
+}
+section
+{
+	background-color: #222222;
+	margin: 20px 50px;
+	padding: 10px 20px;
+	overflow: hidden;
+}
+section.map-section-links
+{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	position: sticky;
+	z-index: 3;
+	top: 0;
+	box-shadow: 0 0 16px black;
+}
+div.filter{
+	width: 50%;
+}
+div.filters{
+	display: flex;
+	margin: 20px 50px;
+}
+section .headers
+{
+	color: #FFFFFF;
+	text-decoration: none;
+	font: normal normal 700 1em "Roboto Condensed", sans-serif;
+	padding: 3px;
+}
+section .headers:hover
+{
+	color: #FFC200;
+	text-decoration: none;
+	font: normal normal 700 1em "Roboto Condensed", sans-serif;
+	padding: 3px;
+}
+section h2
+{
+	border-bottom: 2px solid #FFC200;
+	color: #FFFFFF;
+	font: normal normal 700 3em "Roboto Condensed", sans-serif;
+	margin-bottom: 10px;
+}
+section div h3
+{
+	color: #FFFFFF;
+	font: normal normal 700 1.3em "Roboto Condensed", sans-serif;
+	padding: 4px 0px 0px 10px;
+	float: left;
+	width: 100%;
+	text-align: left;
+	box-sizing: border-box;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+section div.map-card-flag-left
+{
+    text-align: left;
+}
+section div.map-card-flag-right
+{
+    text-align: right;
+}
+section img.map-card-flag
+{
+	width: 45%;
+}
+section div.map-card-flags
+{
+	position: relative;
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: -2vw;
+	padding-right: 15px;
+	padding-left: 15px;
+    z-index: 2;
+}
+section img.map-img
+{
+	width: 95%;
+	height: auto;
+}
+section a.map-card
+{
+	z-index: 1;
+}
+section div.map-card-title
+{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	padding-right: 15px;
+}
+section div.map-layer-card
+{
+	float: left;
+	width: 16.666%;
+	text-align: center;
+}
+
+
+#modal_background
+{
+	display: none;
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.8);
+}
+.modal_content
+{
+	background-color: #222222;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 90%;
+	height: 90%;
+	overflow-y: hidden;
+	border: 2px solid #FFC200;
+	display: flex;
+	flex-direction: column;
+}
+.full_height
+{
+	flex-grow: 1;
+}
+
+.faction_header
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.faction_select
+{
+	padding-left: 10px;
+	width: 40%;
+	display: inline-block;
+	font: normal normal 700 1.3em "Roboto Condensed", sans-serif;
+}
+.loadout_select
+{
+	height: 25px;
+	width: 100%;
+}
+.modal_content h2
+{
+	border-bottom: 2px solid #FFC200;
+	color: #FFFFFF;
+	font: normal normal 700 3em "Roboto Condensed", sans-serif;
+	padding: 10px 0px;
+	text-align: center;
+}
+.modal_side_panel
+{
+	width: 25%;
+	height: 100%;
+	float: left;
+	overflow: hidden;
+	box-sizing: border-box;
+
+	padding: 10px 20px;
+}
+.modal_center_panel
+{
+	border-left: 2px solid #FFC200;
+	border-right: 2px solid #FFC200;
+	width: 50%;
+	height: 100%;
+	float: left;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.modal_center_panel_top
+{
+	width: 100%;
+	float: left;
+	color: #FFFFFF;
+	padding: 18px 0px;
+	box-sizing: border-box;
+}
+.modal_center_panel_top div
+{
+	text-align: center;
+	display: block;
+	width: 33%;
+	float: left;
+}
+.modal_label
+{
+	display: inline;
+	font: normal normal 700 1.25em "Roboto Condensed", sans-serif;
+}
+.modal_value
+{
+	display: inline;
+	font: normal normal 300 1.5em "Roboto Condensed", sans-serif;
+}
+#map{
+	background: #222;
+}
+.modal_center_panel_bottom
+{
+	width: 100%;
+	height: 85vh;
+	float: left;
+	overflow: hidden;
+	box-sizing: border-box;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	align-content: center;
+}
+.modal_flag
+{
+	display: inline-block;
+	max-height: 3em;
+}
+.modal_team_name
+{
+	display: inline-block;
+	color: #FFFFFF;
+	font: normal normal 700 3em "Roboto Condensed", sans-serif;
+	padding-left: 10px;
+	vertical-align: super;
+}
+.ticket_icon
+{
+	width: 2em;
+}
+.modal_team_tickets
+{
+	display: inline-block;
+	color: #FFFFFF;
+	font: normal normal 700 2em "Roboto Condensed", sans-serif;
+	padding-left: 5px;
+	vertical-align: super;
+}
+.modal_team_vehicles
+{
+	overflow: visible;
+	border-top: 1px solid white;
+	padding-top: 5px;
+}
+.modal_content li
+{
+	margin-top: 2px;
+}
+.modal_content li p
+{
+	display: inline-block;
+	text-align: right;
+	min-width: 1em;
+	color: #FFFFFF;
+	font: normal normal 300 1.5em "Roboto Condensed", sans-serif;
+}
+.modal_content li img
+{
+	max-height: 2em;
+	display: inline-block;
+	vertical-align: -50%;
+}
+
+
+
+.modal_content li a
+{
+	display: inline-block;
+	color: #FFFFFF;
+	font: normal normal 500 1.25em "Roboto Condensed", sans-serif;
+	padding-left: 5px;
+}
+.modal_content li small
+{
+	color: #FFFFFF;
+	font: normal normal 300 0.8em "Roboto Condensed", sans-serif;
+	padding-left: 40px;
+}
+

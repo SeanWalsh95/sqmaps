@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Squad Maps</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="SquadMaps: All maps and layers in Squad">
+	<meta name="keywords" content="Squad, Maps, Squad Maps, Maps Squad, Al Basrah, Basrah, Belaya, Chora, Fallujah, Fool's Road, Fools Road, Gorodok, Goro, Jensen's Range, Jensen's, Jensen, Kohat, Kohat Toi, Kokan, Logar Valley, Logar, Mestia, Narva, Op First Light, First Light, Sumari, Sumari Bala, Yehorivka, Yeho">
+	<link rel="shortcut icon" href="img/icons/favicon.ico">
+
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<link rel="stylesheet" type="text/css" href="style/fonts.css">
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-G057ERVS1G"></script>
+
+	<script src="lib/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="lib/dropdown/dropdown.min.css">
+	<script src="lib/dropdown/dropdown.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="lib/leaflet/css/leaflet.css">
+	<script src="lib/leaflet/leaflet.js"></script>
+
+	<script src="scripts/data/mapLayerData.js"></script>
+</head>
+
+<body>
+	<div class="top_links">
+		<p>Adapted from <a href="https://squadmaps.com/">Napster653</a>, Kief, LeventHAN<br>Map data From <a href="https://squad.gamepedia.com/Squad_Wiki">Squad Wiki</a></p>
+	</div>
+	<header>
+		<h1>SQUAD MAPS</h1>
+	</header>
+	<section class="map-section-links">
+	</section>
+	
+	<div class="layer-search filters">
+		<input id="layersearch" onkeyup="filterLayers()" type="text" name="search" placeholder="Search Layers.."> 
+	</div>
+	<div class="filters">
+		<div class="faction-filter filter">
+			<select id="faction-filter-select" name="" multiple style="display: none;">
+			</select>
+		</div>
+		<div class="gamemode-filter filter">
+			<select id="gamemode-filter-select" name="" multiple style="display: none;">
+			</select>
+		</div>
+	</div>
+	<div id="maps_container">
+
+	</div>
+
+	<div id="modal_background">
+		<div class="modal_content">
+			<h2 id="layer_name"></h2>
+			<div class="full_height">
+				<div class="modal_side_panel">
+					<div class="faction_header">
+						<img class="modal_flag" id="team_1_flag" src="img/icons/flag_undefined.png">
+						<select class="faction_select" id="team_1_fac_options">
+						</select>
+					</div>
+					<select class="loadout_select" id="team_1_load_options">
+					</select>
+					<div>
+						<img class="ticket_icon" src="img/icons/ticket.png">
+						<h4 class="modal_team_tickets" id="team_1_tickets"></h4>
+					</div>
+					<ul class="modal_team_vehicles" id="team_1_vehicles">
+					</ul>
+				</div>
+				<div class="modal_center_panel">
+					<div class="modal_center_panel_top" id="map_info">
+						<div>
+							<p class="modal_label" id="label_commander">Commander: </p>
+							<p class="modal_value" id="value_commander"></p>
+						</div>
+						<div>
+							<p class="modal_label" id="label_weather">Weather: </p>
+							<p class="modal_value" id="value_weather"></p>
+						</div>
+						<div>
+							<p class="modal_label" id="label_number_of_flags">#🏳️: </p>
+							<p class="modal_value" id="value_number_of_flags"></p>
+						</div>
+					</div>
+						<div class="modal_center_panel_bottom" id="map"></div>
+				</div>
+				<div class="modal_side_panel">
+					<div class="faction_header">
+						<img class="modal_flag" id="team_2_flag" src="img/icons/flag_undefined.png">
+						<select class="faction_select" id="team_2_fac_options">
+						</select>
+					</div>
+					<select class="loadout_select" id="team_2_load_options">
+					</select>
+					<br>
+					<img class="ticket_icon" src="img/icons/ticket.png">
+					<h4 class="modal_team_tickets" id="team_2_tickets"></h4>
+					<ul class="modal_team_vehicles" id="team_2_vehicles">
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="scripts/structure/globals.js"></script>
+	<script src="scripts/structure/vehicles.js"></script>
+	<script src="scripts/structure/layers.js"></script>
+	<script src="scripts/utils.js"></script>
+	<script src="scripts/generate_content.js"></script>
+	<script src="scripts/layer_handler.js"></script>
+	<script src="scripts/interactive_map.js"></script>
+	
+	<script>
+		fetchMapData(render=true);
+
+		// Handles modals related to this page
+		window.onclick = function (event)
+		{
+			if (event.target == modal)
+			{
+				var body = document.getElementsByTagName("BODY")[0];
+				body.style.overflow = "auto";
+
+				modal.style.display = "none";
+
+				var team_1_ul = document.getElementById("team_1_vehicles");
+				var team_2_ul = document.getElementById("team_2_vehicles");
+
+				team_1_ul.innerHTML = "";
+				team_2_ul.innerHTML = "";
+			}
+		}
+
+		const facData = factionEnum.values().map((f)=> { return {selected:true, name:f.name, id:f.initials}})
+    $('.faction-filter').dropdown({
+        readOnly: false,
+        minCountErrorMessage: '',
+        limitCount: Infinity,
+        limitCountErrorMessage: '',
+        input: '<input type="text" maxLength="20" placeholder="Search...">',
+        data: facData,
+        searchable: false,
+        searchNoData: '<li style="color:#ddd">No Results</li>',
+        choice: filterLayers
+
+    });
+		
+		const gmData = gamemodeEnum.values().map((g)=> { return {selected:true, name:g.name, id:g.abbr}})
+    $('.gamemode-filter').dropdown({
+        readOnly: false,
+        minCountErrorMessage: '',
+        limitCount: Infinity,
+        limitCountErrorMessage: '',
+        input: '<input type="text" maxLength="20" placeholder="Search...">',
+        data: gmData,
+        searchable: false,
+        searchNoData: '<li style="color:#ddd">No Results</li>',
+        choice: filterLayers
+
+    });
+		
+	</script>
+
+
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-G057ERVS1G');
+	</script>
+
+</body>
+
+</html>
